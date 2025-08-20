@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>La Tablita - Pedido rápido</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <h1>Pedido rápido</h1>
+    <p class="hint">El 5% de descuento aplica <b>solo</b> a “otras cosas” si pagás en <b>efectivo</b> o <b>Mercado Pago</b>. “Queso barra y cremoso” no tiene descuento.</p>
+
+    <label for="montoQuesoCremoso">Queso cremoso</label>
+    <input id="montoQuesoCremoso" type="number" min="0" step="10" placeholder="Ej: 4500.00" inputmode="decimal" />
+
+    <label for="montoQuesoBarra">Queso barra</label>
+    <input id="montoQuesoBarra" type="number" min="0" step="10" placeholder="Ej: 4500.00" inputmode="decimal" />
+
+    <label>Otras cosas</label>
+    <div id="otrasContainer">
+      <!-- Fila inicial -->
+      <div class="otras-row">
+        <input class="otras" type="number" min="0" step="10" placeholder="Ej: 1200.00" inputmode="decimal" />
+        <button type="button" class="btn-ghost remove">✕</button>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="addOtro" type="button" class="btn-ghost">+ Agregar otro producto</button>
+    </div>
+
+    <label for="metodo">Método de pago</label>
+    <select id="metodo" aria-label="Seleccionar método de pago">
+      <option value="" disabled selected>Elegí una opción</option>
+      <option value="efectivo">Efectivo</option>
+      <option value="mercadopago">Mercado Pago</option>
+      <option value="debito">Débito</option>
+      <option value="credito">Crédito</option>
+    </select>
+
+    <div class="actions">
+      <button class="btn" id="btnCalcular" type="button">Calcular</button>
+      <button class="btn-ghost danger" id="btnLimpiar" type="button">Limpiar</button>
+    </div>
+
+    <div class="totals" aria-live="polite">
+      <div>Total bruto: <span id="totalBruto">$0,00</span></div><br>
+      <div>Descuento aplicado: <span id="descuento">$0,00</span> <small class="muted">(solo “otras cosas” con efectivo o MP)</small></div><br>
+      <div><b>Total final:</b> <span id="totalFinal">$0,00</span></div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

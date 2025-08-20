@@ -1,0 +1,165 @@
+/* =========================
+   Variables y reset básico
+   ========================= */
+:root {
+    --bg: #4b7a46;
+    --card: #fff;
+    --text: #222;
+    --accent: #bf0404;
+    --muted: #666;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* =========================
+     Base tipográfica y layout
+     ========================= */
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    background: url("fondo.png");
+    background-size: cover;
+    /* o "cover" si querés que se escale */
+    background-attachment: fixed;
+    /* para que quede fijo al hacer scroll */
+
+}
+
+.wrap {
+    max-width: 560px;
+    margin: 6vh auto;
+    background: var(--card);
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+}
+
+/* =========================
+     Títulos y textos
+     ========================= */
+h1 {
+    margin: 0 0 6px;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+p.hint {
+    margin: 0 0 18px;
+    color: var(--muted);
+    text-align: center;
+}
+
+/* =========================
+     Formularios
+     ========================= */
+label {
+    display: block;
+    font-weight: 600;
+    margin: 12px 0 6px;
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+}
+
+input[type="number"]:focus,
+select:focus {
+    border-color: var(--accent);
+}
+
+/* =========================
+     Filas dinámicas "otras"
+     ========================= */
+.otras-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: center;
+    margin: 8px 0;
+}
+
+/* =========================
+     Botones
+     ========================= */
+.btn,
+.btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 12px;
+    font-weight: 700;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn {
+    background: var(--accent);
+    color: #fff;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-ghost {
+    background: #f1f1f1;
+    color: #333;
+}
+
+.btn-ghost:hover {
+    background: #e7e7e7;
+}
+
+.danger {
+    background: #eee;
+    color: #a00;
+}
+
+/* =========================
+     Bloque totales y acciones
+     ========================= */
+.totals {
+    margin-top: 16px;
+    padding: 12px;
+    background: #f7f7f7;
+    border-radius: 10px;
+}
+
+.totals b {
+    display: inline-block;
+    min-width: 140px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+}
+
+small.muted {
+    color: var(--muted);
+}
+
+/* =========================
+     Accesibilidad (opcional)
+     ========================= */
+/* Reduce animaciones si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+    .btn:hover {
+        opacity: 1;
+    }
+}
