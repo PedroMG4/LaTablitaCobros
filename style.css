@@ -1,7 +1,7 @@
 /* =========================
    Variables y reset básico
    ========================= */
-:root {
+   :root {
     --bg: #4b7a46;
     --card: #fff;
     --text: #222;
@@ -9,24 +9,18 @@
     --muted: #666;
 }
 
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 /* =========================
-     Base tipográfica y layout
-     ========================= */
+   Base tipográfica y layout
+   ========================= */
 body {
     margin: 0;
     font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    background: var(--bg);
     color: var(--text);
     background: url("fondo.png");
     background-size: cover;
-    /* o "cover" si querés que se escale */
     background-attachment: fixed;
-    /* para que quede fijo al hacer scroll */
-
 }
 
 .wrap {
@@ -39,8 +33,8 @@ body {
 }
 
 /* =========================
-     Títulos y textos
-     ========================= */
+   Títulos y textos
+   ========================= */
 h1 {
     margin: 0 0 6px;
     font-size: 1.6rem;
@@ -54,8 +48,8 @@ p.hint {
 }
 
 /* =========================
-     Formularios
-     ========================= */
+   Formularios
+   ========================= */
 label {
     display: block;
     font-weight: 600;
@@ -79,9 +73,10 @@ select:focus {
 }
 
 /* =========================
-     Filas dinámicas "otras"
-     ========================= */
-.otras-row {
+   Filas dinámicas
+   ========================= */
+.otras-row,
+.colita-row {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 8px;
@@ -89,9 +84,19 @@ select:focus {
     margin: 8px 0;
 }
 
+/* Botón ✕ compacto en filas */
+.otras-row .btn-ghost,
+.colita-row .btn-ghost {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1;
+}
+
 /* =========================
-     Botones
-     ========================= */
+   Botones
+   ========================= */
 .btn,
 .btn-ghost {
     display: inline-flex;
@@ -110,18 +115,14 @@ select:focus {
     color: #fff;
 }
 
-.btn:hover {
-    opacity: 0.9;
-}
+.btn:hover { opacity: 0.9; }
 
 .btn-ghost {
     background: #f1f1f1;
     color: #333;
 }
 
-.btn-ghost:hover {
-    background: #e7e7e7;
-}
+.btn-ghost:hover { background: #e7e7e7; }
 
 .danger {
     background: #eee;
@@ -129,20 +130,8 @@ select:focus {
 }
 
 /* =========================
-     Bloque totales y acciones
-     ========================= */
-.totals {
-    margin-top: 16px;
-    padding: 12px;
-    background: #f7f7f7;
-    border-radius: 10px;
-}
-
-.totals b {
-    display: inline-block;
-    min-width: 140px;
-}
-
+   Barras de acciones
+   ========================= */
 .actions {
     display: flex;
     gap: 10px;
@@ -150,16 +139,44 @@ select:focus {
     margin-top: 14px;
 }
 
-small.muted {
-    color: var(--muted);
+/* Alinear a la derecha los "+ Agregar..." de cada sección */
+#colitasContainer + .actions,
+#otrasContainer + .actions {
+    justify-content: flex-end;
+}
+
+/* Footer de acciones (Calcular/Limpiar):
+   que se adapten a móvil (full width) */
+#btnCalcular,
+#btnLimpiar {
+    flex: 1 1 100%;
+}
+
+/* En pantallas medianas+, ponerlos lado a lado con mismo ancho */
+@media (min-width: 520px) {
+    #btnCalcular,
+    #btnLimpiar {
+        flex: 1 1 0;
+    }
 }
 
 /* =========================
-     Accesibilidad (opcional)
-     ========================= */
-/* Reduce animaciones si el usuario lo prefiere */
+   Bloque totales
+   ========================= */
+.totals {
+    margin-top: 16px;
+    padding: 12px;
+    background: #f7f7f7;
+    border-radius: 10px;
+}
+
+.totals b { display: inline-block; min-width: 140px; }
+
+small.muted { color: var(--muted); }
+
+/* =========================
+   Accesibilidad (opcional)
+   ========================= */
 @media (prefers-reduced-motion: reduce) {
-    .btn:hover {
-        opacity: 1;
-    }
+    .btn:hover { opacity: 1; }
 }

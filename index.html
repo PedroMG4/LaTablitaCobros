@@ -6,10 +6,14 @@
   <title>La Tablita - Pedido rápido</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <main class="wrap">
     <h1>Pedido rápido</h1>
-    <p class="hint">El 5% de descuento aplica <b>solo</b> a “otras cosas” si pagás en <b>efectivo</b> o <b>Mercado Pago</b>. “Queso barra y cremoso” no tiene descuento.</p>
+    <p class="hint">
+      El descuento se aplica <b>solo</b> a “otras cosas” si pagás en <b>efectivo</b> o <b>Mercado Pago</b>.
+      “Queso barra y cremoso” no tiene descuento.
+    </p>
 
     <label for="montoQuesoCremoso">Queso cremoso</label>
     <input id="montoQuesoCremoso" type="number" min="0" step="10" placeholder="Ej: 4500.00" inputmode="decimal" />
@@ -17,12 +21,22 @@
     <label for="montoQuesoBarra">Queso barra</label>
     <input id="montoQuesoBarra" type="number" min="0" step="10" placeholder="Ej: 4500.00" inputmode="decimal" />
 
+    <label>Retazos de fiambre</label>
+    <div id="colitasContainer">
+      <div class="colita-row">
+        <input class="colita" type="number" min="0" step="10" placeholder="Ej: 1200.00" inputmode="decimal" />
+        <button type="button" class="btn-ghost remove-colita" aria-label="Quitar retazo">✕</button>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="addOtra" type="button" class="btn-ghost">+ Agregar otro retazo</button>
+    </div>
+
     <label>Otras cosas</label>
     <div id="otrasContainer">
-      <!-- Fila inicial -->
       <div class="otras-row">
-        <input class="otras" type="number" min="0" step="10" placeholder="Ej: 1200.00" inputmode="decimal" />
-        <button type="button" class="btn-ghost remove">✕</button>
+        <input class="otra" type="number" min="0" step="10" placeholder="Ej: 1200.00" inputmode="decimal" />
+        <button type="button" class="btn-ghost remove-otra" aria-label="Quitar producto">✕</button>
       </div>
     </div>
     <div class="actions">
@@ -38,6 +52,16 @@
       <option value="credito">Crédito</option>
     </select>
 
+    <!-- NUEVO: selector de porcentaje -->
+    <label for="porcentajeDesc">Porcentaje de descuento</label>
+    <select id="porcentajeDesc" aria-label="Seleccionar porcentaje de descuento">
+      <option value="0">0%</option>
+      <option value="5" selected>5%</option>
+      <option value="10">10%</option>
+      <option value="15">15%</option>
+      <option value="20">20%</option>
+    </select>
+
     <div class="actions">
       <button class="btn" id="btnCalcular" type="button">Calcular</button>
       <button class="btn-ghost danger" id="btnLimpiar" type="button">Limpiar</button>
@@ -45,7 +69,12 @@
 
     <div class="totals" aria-live="polite">
       <div>Total bruto: <span id="totalBruto">$0,00</span></div><br>
-      <div>Descuento aplicado: <span id="descuento">$0,00</span> <small class="muted">(solo “otras cosas” con efectivo o MP)</small></div><br>
+      <div>
+        Descuento aplicado: <span id="descuento">$0,00</span>
+        <small class="muted">
+          (solo “otras cosas” con efectivo o MP · <span id="porcView">5%</span>)
+        </small>
+      </div><br>
       <div><b>Total final:</b> <span id="totalFinal">$0,00</span></div>
     </div>
   </main>
