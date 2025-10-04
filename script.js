@@ -21,6 +21,7 @@ const contOtras        = $("#otrasContainer");
 const elMetodo         = $("#metodo");
 const elPorcentaje     = $("#porcentajeDesc");   // NUEVO
 const elPorcView       = $("#porcView");         // NUEVO
+const elDineroEntregado = $("#dineroEntregado"); // NUEVO
 
 const btnAddColita     = $("#addOtra");
 const btnAddOtra       = $("#addOtro");
@@ -30,6 +31,8 @@ const btnClear         = $("#btnLimpiar");
 const elBruto          = $("#totalBruto");
 const elDesc           = $("#descuento");
 const elFinal          = $("#totalFinal");
+const elVuelto         = $("#vuelto");           // NUEVO
+const elChangeDisplay  = $("#changeDisplay");    // NUEVO
 
 // === Filas dinámicas (sin cambios de lógica) ===
 function wireOtraRow(row) {
@@ -104,11 +107,23 @@ function calcular() {
 
   const totalFinal = totalBruto - montoDescuento;
 
+  // Cálculo del vuelto
+  const dineroEntregado = parseMonto(elDineroEntregado.value);
+  const vuelto = dineroEntregado > 0 ? dineroEntregado - totalFinal : 0;
+
   // UI
   elBruto.textContent = formatARS(totalBruto);
   elDesc.textContent  = formatARS(montoDescuento);
   elFinal.textContent = formatARS(totalFinal);
   if (elPorcView) elPorcView.textContent = `${porc}%`;
+
+  // Mostrar/ocultar display del vuelto
+  if (dineroEntregado > 0) {
+    elChangeDisplay.style.display = "block";
+    elVuelto.textContent = formatARS(vuelto);
+  } else {
+    elChangeDisplay.style.display = "none";
+  }
 
   // Logs
   console.clear();
@@ -120,12 +135,17 @@ function calcular() {
   console.log(`Total bruto: ${formatARS(totalBruto)}`);
   console.log(`Descuento aplicado: ${formatARS(montoDescuento)}`);
   console.log(`Total final: ${formatARS(totalFinal)}`);
+  if (dineroEntregado > 0) {
+    console.log(`Dinero entregado: ${formatARS(dineroEntregado)}`);
+    console.log(`Vuelto a dar: ${formatARS(vuelto)}`);
+  }
 }
 
 // Listeners
 [elQuesoCremoso, elQuesoBarra].forEach(el => el.addEventListener("input", calcular));
 elMetodo.addEventListener("change", calcular);
 elPorcentaje.addEventListener("change", calcular); // NUEVO
+elDineroEntregado.addEventListener("input", calcular); // NUEVO
 btnCalc.addEventListener("click", calcular);
 
 // Limpiar
@@ -134,6 +154,7 @@ btnClear.addEventListener("click", () => {
   elQuesoBarra.value   = "";
   elMetodo.value       = "";
   elPorcentaje.value   = "5"; // vuelve al 5% por defecto (ajustá si querés otro)
+  elDineroEntregado.value = ""; // NUEVO
 
   contOtras.innerHTML = "";
   contColitas.innerHTML = "";

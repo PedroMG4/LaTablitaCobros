@@ -11,71 +11,96 @@
   <main class="wrap">
     <h1>Pedido rápido</h1>
     <p class="hint">
-      El descuento se aplica <b>solo</b> a “otras cosas” si pagás en <b>efectivo</b> o <b>Mercado Pago</b>.
-      “Queso barra y cremoso” no tiene descuento.
+      El descuento se aplica <b>solo</b> a "otras cosas" si pagás en <b>efectivo</b> o <b>Mercado Pago</b>.
+      "Queso barra y cremoso" no tiene descuento.
     </p>
 
-    <label for="montoQuesoCremoso">Queso cremoso</label>
-    <input id="montoQuesoCremoso" type="number" min="0" step="10" placeholder="Ej: 4500.00" inputmode="decimal" />
+    <div class="three-columns">
+      <!-- COLUMNA 1: INGRESO DE MERCADERÍA -->
+      <div class="column">
+        <h2>Mercadería</h2>
+        
+        <label for="montoQuesoCremoso">Queso cremoso</label>
+        <input id="montoQuesoCremoso" type="number" min="0" step="10" placeholder="Ej: 4500.00" inputmode="decimal" />
 
-    <label for="montoQuesoBarra">Queso barra</label>
-    <input id="montoQuesoBarra" type="number" min="0" step="10" placeholder="Ej: 4500.00" inputmode="decimal" />
+        <label for="montoQuesoBarra">Queso barra</label>
+        <input id="montoQuesoBarra" type="number" min="0" step="10" placeholder="Ej: 4500.00" inputmode="decimal" />
 
-    <label>Retazos de fiambre</label>
-    <div id="colitasContainer">
-      <div class="colita-row">
-        <input class="colita" type="number" min="0" step="10" placeholder="Ej: 1200.00" inputmode="decimal" />
-        <button type="button" class="btn-ghost remove-colita" aria-label="Quitar retazo">✕</button>
+        <label>Retazos de fiambre</label>
+        <div id="colitasContainer">
+          <div class="colita-row">
+            <input class="colita" type="number" min="0" step="10" placeholder="Ej: 1200.00" inputmode="decimal" />
+            <button type="button" class="btn-ghost remove-colita" aria-label="Quitar retazo">✕</button>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="addOtra" type="button" class="btn-ghost">+ Agregar otro retazo</button>
+        </div>
+
+        <label>Otras cosas</label>
+        <div id="otrasContainer">
+          <div class="otras-row">
+            <input class="otra" type="number" min="0" step="10" placeholder="Ej: 1200.00" inputmode="decimal" />
+            <button type="button" class="btn-ghost remove-otra" aria-label="Quitar producto">✕</button>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="addOtro" type="button" class="btn-ghost">+ Agregar otro producto</button>
+        </div>
       </div>
-    </div>
-    <div class="actions">
-      <button id="addOtra" type="button" class="btn-ghost">+ Agregar otro retazo</button>
-    </div>
 
-    <label>Otras cosas</label>
-    <div id="otrasContainer">
-      <div class="otras-row">
-        <input class="otra" type="number" min="0" step="10" placeholder="Ej: 1200.00" inputmode="decimal" />
-        <button type="button" class="btn-ghost remove-otra" aria-label="Quitar producto">✕</button>
+      <!-- COLUMNA 2: MÉTODO DE PAGO Y DESCUENTOS -->
+      <div class="column">
+        <h2>Pago y Descuentos</h2>
+        
+        <label for="metodo">Método de pago</label>
+        <select id="metodo" aria-label="Seleccionar método de pago">
+          <option value="" disabled selected>Elegí una opción</option>
+          <option value="efectivo">Efectivo</option>
+          <option value="mercadopago">Mercado Pago</option>
+          <option value="debito">Débito</option>
+          <option value="credito">Crédito</option>
+        </select>
+
+        <label for="porcentajeDesc">Porcentaje de descuento</label>
+        <select id="porcentajeDesc" aria-label="Seleccionar porcentaje de descuento">
+          <option value="0">0%</option>
+          <option value="5" selected>5%</option>
+          <option value="10">10%</option>
+          <option value="15">15%</option>
+          <option value="20">20%</option>
+        </select>
+
+        <div class="actions">
+          <button class="btn" id="btnCalcular" type="button">Calcular</button>
+          <button class="btn-ghost danger" id="btnLimpiar" type="button">Limpiar</button>
+        </div>
+
+        <div class="totals" aria-live="polite">
+          <div>Total bruto: <span id="totalBruto">$0,00</span></div><br>
+          <div>
+            Descuento aplicado: <span id="descuento">$0,00</span>
+            <small class="muted">
+              (solo "otras cosas" con efectivo o MP · <span id="porcView">5%</span>)
+            </small>
+          </div><br>
+          <div><b>Total final:</b> <span id="totalFinal">$0,00</span></div>
+        </div>
       </div>
-    </div>
-    <div class="actions">
-      <button id="addOtro" type="button" class="btn-ghost">+ Agregar otro producto</button>
-    </div>
 
-    <label for="metodo">Método de pago</label>
-    <select id="metodo" aria-label="Seleccionar método de pago">
-      <option value="" disabled selected>Elegí una opción</option>
-      <option value="efectivo">Efectivo</option>
-      <option value="mercadopago">Mercado Pago</option>
-      <option value="debito">Débito</option>
-      <option value="credito">Crédito</option>
-    </select>
+      <!-- COLUMNA 3: DINERO Y VUELTO -->
+      <div class="column">
+        <h2>Dinero y Vuelto</h2>
+        
+        <label for="dineroEntregado">Dinero entregado por el cliente</label>
+        <input id="dineroEntregado" type="number" min="0" step="10" placeholder="Ej: 5000.00" inputmode="decimal" />
 
-    <!-- NUEVO: selector de porcentaje -->
-    <label for="porcentajeDesc">Porcentaje de descuento</label>
-    <select id="porcentajeDesc" aria-label="Seleccionar porcentaje de descuento">
-      <option value="0">0%</option>
-      <option value="5" selected>5%</option>
-      <option value="10">10%</option>
-      <option value="15">15%</option>
-      <option value="20">20%</option>
-    </select>
-
-    <div class="actions">
-      <button class="btn" id="btnCalcular" type="button">Calcular</button>
-      <button class="btn-ghost danger" id="btnLimpiar" type="button">Limpiar</button>
-    </div>
-
-    <div class="totals" aria-live="polite">
-      <div>Total bruto: <span id="totalBruto">$0,00</span></div><br>
-      <div>
-        Descuento aplicado: <span id="descuento">$0,00</span>
-        <small class="muted">
-          (solo “otras cosas” con efectivo o MP · <span id="porcView">5%</span>)
-        </small>
-      </div><br>
-      <div><b>Total final:</b> <span id="totalFinal">$0,00</span></div>
+        <div class="change-display" id="changeDisplay" style="display: none;">
+          <div class="change-amount">
+            <b>Vuelto a dar: <span id="vuelto">$0,00</span></b>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
